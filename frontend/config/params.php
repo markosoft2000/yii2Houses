@@ -1,4 +1,4 @@
 <?php
-return [
+return [//Yii::$app->params[];
     'adminEmail' => 'admin@example.com',
 ];
