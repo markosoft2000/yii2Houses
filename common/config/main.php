@@ -1,5 +1,6 @@
 <?php
 return [
+    'name' => 'Marko Yii2 Project',
     'vendorPath' => dirname(dirname(__DIR__)) . '/vendor',
     'components' => [
         'cache' => [
