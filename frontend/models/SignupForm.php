@@ -12,6 +12,7 @@ class SignupForm extends Model
     public $username;
     public $email;
     public $password;
+    public $repassword;
 
 
     /**
@@ -33,7 +34,20 @@ class SignupForm extends Model
 
             ['password', 'required'],
             ['password', 'string', 'min' => 6],
+
+            ['repassword', 'required'],
+            ['repassword', 'compare', 'compareAttribute' => 'password'],
+            ['repassword', 'string', 'min' => 6],
         ];
+    }
+
+    public function scenarios(){
+        $scenarios = parent::scenarios();
+        /*$scenarios['short_register'] = ['username', 'email'];
+        $scenarios['short_register2'] = ['username', 'email', 'password'];
+        $scenarios['short_register3'] = ['email', 'password'];*/
+
+        return $scenarios;
     }
 
     /**

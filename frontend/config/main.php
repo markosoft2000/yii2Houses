@@ -13,6 +13,7 @@ return [
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
     'controllerNamespace' => 'frontend\controllers',
+    'defaultRoute' => 'main',
     'modules' => [
         'main' => [
             'class' => 'app\modules\main\Module',
@@ -22,7 +23,7 @@ return [
         'mail' => [
             'class'            => 'zyx\phpmailer\Mailer',
             'viewPath'         => '@common/mail',
-            'useFileTransport' => false,
+            'useFileTransport' => false,// if true - mail copy will be saved in frontend/runtime/mail
             'config'           => [
                 'mailer'     => 'smtp',
                 'host'       => 'smtp.yandex.ru',
@@ -31,6 +32,8 @@ return [
                 'smtpauth'   => true,
                 'username'   => 'markosoft2000@yandex.ru',
                 'password'   => '1234567890',
+                'ishtml'     => true,
+                'charset'    => 'UTF-8',
             ],
         ],
         'common' => [
