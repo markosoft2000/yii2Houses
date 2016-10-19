@@ -133,7 +133,7 @@ use \yii\helpers\Html;
                             <?= Html::submitButton('Find Now', ['class' => 'btn btn-success'])?>
                         </div>
                     </div>
-                    <?php Html::endForm() ?>
+                    <?= Html::endForm() ?>
                 </div>
                 <div class="col-lg-5 col-lg-offset-1 col-sm-6 ">
                     <p>Join now and get updated with all the properties deals.</p>

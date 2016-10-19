@@ -23,7 +23,7 @@
                     <li><a href="about.html" >About</a></li>
                     <li><a href="agents.html" >Agents</a></li>
                     <li><a href="blog.html" >Blog</a></li>
-                    <li><a href="contact.html" >Contact</a></li>
+                    <li><a href="<?= \yii\helpers\Url::to('main/main/contact') ?>" >Contact</a></li>
                 </ul>
             </div>
             <!-- #Nav Ends -->

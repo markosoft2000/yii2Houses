@@ -4,6 +4,7 @@
 
 use \yii\helpers\Html;
 use \frontend\assets\MainAsset;
+use \common\widgets\Alert;
 
 MainAsset::register($this);
 ?>
@@ -21,6 +22,20 @@ MainAsset::register($this);
 
 <body>
 <?php $this->beginBody(); ?>
+
+<?php
+/*if (Yii::$app->session->hasFlash('reg_success')) { // target check for flash message
+    echo Yii::$app->session->getFlash('reg_success');
+
+    //or
+    echo yii\bootstrap\Alert::widget([
+        'options' => ['class' => 'alert-info'],
+        'body' => Yii::$app->session->getFlash('reg_success')
+    ]);
+}*/
+?>
+
+<?= Alert::widget() ?>
 
 <?= $this->render("//common/header"); ?>
 
