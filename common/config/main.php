@@ -7,6 +7,9 @@ return [
         'cache' => [
             'class' => 'yii\caching\FileCache',
         ],
+        'cacheBase64' => [
+            'class' => 'common\cache\Base64Cache',
+        ],
         'urlManager' => [
             'class' => 'yii\web\UrlManager',
             'enablePrettyUrl' => true,

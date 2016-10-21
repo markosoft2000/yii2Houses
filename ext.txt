@@ -1,0 +1,5 @@
+#tune off AdBlockers on the site
+composer require --prefer-dist zyx/zyx-phpmailer "@stable"
+composer require kartik-v/bootstrap-fileinput "@dev"
+//composer require kartik-v/yii2-widget-fileinput "@dev"
+composer require --prefer-dist yiisoft/yii2-imagine

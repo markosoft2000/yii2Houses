@@ -50,7 +50,7 @@ class MainController extends Controller
 
         if ($model->load(Yii::$app->request->post())) {
             if ($user = $model->signup()) {
-                Yii::$app->session->setFlash('reg_success', 'Registration is completed');
+                Yii::$app->session->addFlash('info', 'Registration is completed');
 
                 if (Yii::$app->getUser()->login($user)) {
 

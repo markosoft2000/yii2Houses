@@ -3,6 +3,7 @@
 namespace app\modules\main\controllers;
 
 use frontend\components\Common;
+use yii\db\Query;
 use yii\web\Controller;
 
 /**
@@ -14,10 +15,14 @@ class DefaultController extends Controller
      * Renders the index view for the module
      * @return string
      */
-    public function actionIndex()
-    {
-        $this->layout = 'bootstrap';
-        return $this->render('index');
+    public function actionIndex() {
+        $this->layout = "bootstrap";
+        $query = new Query();
+        $command = $query->from('advert')->orderBy('id desc')->limit(5);
+        $resultGeneral = $command->all();
+        $countGeneral = $command->count();
+
+        return $this->render('index',['resultGeneral' => $resultGeneral, 'countGeneral' => $countGeneral]);
     }
 
     public function actionService() {
@@ -25,7 +30,10 @@ class DefaultController extends Controller
 
         $cache->set('test', 123321);
 
-        print $cache->get('test');
+        var_dump($cache->get('test'));
+
+        \Yii::$app->cacheBase64->setValue('test64', 'test_base_64_cache!', 0);
+        var_dump(\Yii::$app->cacheBase64->getValue('test64'));
     }
 
     public function actionEvent() {
