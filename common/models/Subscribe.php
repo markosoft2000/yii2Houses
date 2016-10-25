@@ -28,7 +28,12 @@ class Subscribe extends \yii\db\ActiveRecord
     {
         return [
             [['date_subscribe'], 'safe'],
-            [['email'], 'string', 'max' => 100],
+            ['email', 'required'],
+            ['email', 'trim'],
+            ['email', 'required'],
+            ['email', 'email'],
+            ['email', 'string', 'max' => 255],
+            ['email', 'unique', 'message' => 'This email address has already been subscribed.'],
         ];
     }
 

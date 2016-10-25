@@ -24,7 +24,7 @@ use \yii\helpers\Url;
             <div class="navbar-collapse  collapse">
                 <?php
                     $menuItems = [
-                        ['label' => 'Home', 'url' => '#'],
+                        ['label' => 'Home', 'url' => Url::home()],
                         ['label' => 'About', 'url' => '#'],
                         ['label' => 'Contact', 'url' => Url::to('/main/main/contact')],
                     ];
@@ -47,14 +47,17 @@ use \yii\helpers\Url;
 
     <!-- Header Starts -->
     <div class="header">
-        <a href="index.html" ><img src="/images/logo.png"  alt="Realestate"></a>
+        <a href="<?=Url::home() ?>" ><img src="/images/logo.png"  alt="Realestate"></a>
+        <?
+        $menuItems = [];
+        $guest = Yii::$app->user->isGuest;
 
-        <?php
-        $menuItems = [
-            ['label' => 'Buy', 'url' => '#'],
-            ['label' => 'Sale', 'url' => '#'],
-            ['label' => 'Rent', 'url' => '#'],
-        ];
+        if($guest) {
+            $menuItems[] = ['label' => 'Login', 'url' => '#', 'linkOptions' => ['data-target' => '#loginpop', 'data-toggle' => "modal"]];
+        } else{
+            $menuItems[] = ['label' => 'Advert manager', 'url' => ['/cabinet/advert']];
+            $menuItems[] = ['label' => 'Logout',  'url' => ['/site/logout'], 'linkOptions' => ['data-method' => 'post']];
+        }
 
         echo Nav::widget([
             'options' => ['class' => 'pull-right'],

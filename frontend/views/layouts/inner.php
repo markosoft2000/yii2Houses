@@ -3,6 +3,7 @@
 /* @var $content string */
 
 use \yii\helpers\Html;
+use \yii\helpers\Url;
 use \frontend\assets\MainAsset;
 
 MainAsset::register($this);
@@ -27,7 +28,14 @@ MainAsset::register($this);
 
 <div class="inside-banner">
     <div class="container">
-        <span class="pull-right"><a href="#">Home</a> / <?= $this->title ?></span>
+        <span class="pull-right"><a href="<?=Url::home()?>">Home</a> /
+            <?php
+//            var_dump($this->params['breadcrumbs']);die();
+//            foreach ($this->params['breadcrumbs'] as $crumb): ?>
+<!---->
+<!--            <a href="#">--><?php //var_dump($crumb); ?><!--</a> /-->
+<!--            --><?php //endforeach; ?>
+            <?= $this->title ?></span>
         <h2><?= $this->title ?></h2>
     </div>
 </div>

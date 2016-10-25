@@ -18,11 +18,29 @@ class DefaultController extends Controller
     public function actionIndex() {
         $this->layout = "bootstrap";
         $query = new Query();
-        $command = $query->from('advert')->orderBy('id desc')->limit(5);
-        $resultGeneral = $command->all();
-        $countGeneral = $command->count();
+        $result = $query->from('advert')->limit(5)->orderBy('id desc');
+        $resultGeneral = $result->all();
+        $countGeneral = count($resultGeneral);
 
-        return $this->render('index',['resultGeneral' => $resultGeneral, 'countGeneral' => $countGeneral]);
+        $query = new Query();
+        $result = $query->from('advert')->orderBy('id desc')->limit(15);
+        $resultFeatured = $result->all();
+
+        $query = new Query();
+        $result = $query->from('advert')->where('recommend = 1')->orderBy('id desc')->limit(4);
+        $resultRecommended = $result->all();
+        $countRecommended = count($resultRecommended);
+
+        unset($query);
+        unset($result);
+
+        return $this->render('index',[
+            'resultGeneral' => $resultGeneral,
+            'countGeneral' => $countGeneral,
+            'resultFeatured' => $resultFeatured,
+            'resultRecommended' => $resultRecommended,
+            'countRecommended' => $countRecommended,
+        ]);
     }
 
     public function actionService() {

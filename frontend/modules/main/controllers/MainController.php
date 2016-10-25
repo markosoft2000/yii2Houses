@@ -2,11 +2,14 @@
 
 namespace app\modules\main\controllers;
 
+use common\models\Advert;
+use frontend\components\Common;
+use frontend\filters\FilterAdvert;
 use Yii;
 use frontend\models\ContactForm;
 use frontend\models\SignupForm;
 use common\models\LoginForm;
-use yii\helpers\Url;
+use yii\base\DynamicModel;
 use yii\web\Response;
 use yii\widgets\ActiveForm;
 use \yii\web\Controller;
@@ -28,6 +31,16 @@ class MainController extends Controller
                 'viewName' => 'index'
             ]
         ];
+    }
+
+    public function behaviors() {
+        $behaviors =  parent::behaviors();
+        $behaviors[] = [
+            'class' => FilterAdvert::className(),
+            'only' => ['property-detail'],
+        ];
+
+        return $behaviors;
     }
 
     public function actionIndex()
@@ -106,6 +119,43 @@ class MainController extends Controller
         }
 
         return $this->render('contact', ['model' => $model]);
+    }
+
+    public function actionPropertyDetail($id) {
+        $model = Advert::findOne($id);
+
+        $user = $model->user;
+        $images = Common::getImageAdvert($model, false);
+
+        $data = ['name', 'email', 'text'];
+        $modelFeedback = new DynamicModel($data);
+        $modelFeedback->addRule('name','required');
+        $modelFeedback->addRule('email','required');
+        $modelFeedback->addRule('text','required');
+        $modelFeedback->addRule('email','email');
+
+
+        if (Yii::$app->request->isPost) {
+            if ($modelFeedback->load(Yii::$app->request->post()) && $modelFeedback->validate()){
+                Yii::$app->common->sendMail('Subject Advert', $modelFeedback->text, $modelFeedback->email, $modelFeedback->name);
+            }
+        }
+
+        $currentUser = ['email' => '', 'username' => ''];
+
+        if (!Yii::$app->user->isGuest) {
+            $currentUser['email'] = Yii::$app->user->identity->email;
+            $currentUser['username'] = Yii::$app->user->identity->username;
+        }
+
+        return $this->render('propertyDetail',[
+            'id' => $id,
+            'model' => $model,
+            'modelFeedback' => $modelFeedback,
+            'user' => $user,
+            'images' => $images,
+            'currentUser' => $currentUser,
+        ]);
     }
 
 }

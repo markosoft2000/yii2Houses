@@ -19,7 +19,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
         <?= $form->field($model, 'password')->passwordInput() ?>
 
-        <?= $form->field($model, 'rememberMe')->checkbox() ?>
+        <?= $form->field($model, 'rememberMe')->checkbox(['style' => 'height: initial;']) ?>
 
         <?= Html::submitButton('Login', ['class' => 'btn btn-success', 'name' => 'login-button']) ?>
 
