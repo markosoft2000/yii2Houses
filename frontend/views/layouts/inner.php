@@ -28,14 +28,11 @@ MainAsset::register($this);
 
 <div class="inside-banner">
     <div class="container">
-        <span class="pull-right"><a href="<?=Url::home()?>">Home</a> /
-            <?php
-//            var_dump($this->params['breadcrumbs']);die();
-//            foreach ($this->params['breadcrumbs'] as $crumb): ?>
-<!---->
-<!--            <a href="#">--><?php //var_dump($crumb); ?><!--</a> /-->
-<!--            --><?php //endforeach; ?>
-            <?= $this->title ?></span>
+        <span class="pull-right">
+            <?=\yii\widgets\Breadcrumbs::widget([
+                'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+            ]); ?>
+        </span>
         <h2><?= $this->title ?></h2>
     </div>
 </div>

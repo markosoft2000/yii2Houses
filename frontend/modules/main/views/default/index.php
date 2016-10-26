@@ -48,15 +48,16 @@ use \frontend\components\Common;
     <div class="container">
         <!-- banner -->
         <h3>Buy, Sale & Rent</h3>
+
         <div class="searchbar">
             <div class="row">
                 <div class="col-lg-6 col-sm-6">
-                    <?= Html::beginForm() ?>
-                    <?= Html::textInput('bsr_search', '', ['class' => 'form-control', 'placeholder' => "Search of Properties"]) ?>
+                    <?=Html::beginForm(Url::to('/main/main/find/'), 'get') ?>
+                    <?= Html::textInput('property', '', ['class' => 'form-control', 'placeholder' => "Search of Properties"]) ?>
                     <div class="row">
                         <div class="col-lg-3 col-sm-3 ">
                             <?= Html::dropDownList(
-                                'bsr_operation',
+                                'operation',
                                 '',
                                 [
                                     'Buy' => 'Buy',
@@ -67,19 +68,19 @@ use \frontend\components\Common;
                         </div>
                         <div class="col-lg-3 col-sm-4">
                             <?= Html::dropDownList(
-                                'bsr_price',
+                                'price',
                                 '',
                                 [
-                                    '$150,000 - $200,000' => '$150,000 - $200,000',
-                                    '$200,000 - $250,000' => '$200,000 - $250,000',
-                                    '$250,000 - $300,000' => '$250,000 - $300,000',
-                                    '$300,000 - above' => '$300,000 - above'
+                                    '150000-200000' => '$150,000 - $200,000',
+                                    '200000-250000' => '$200,000 - $250,000',
+                                    '250000-300000' => '$250,000 - $300,000',
+                                    '300000' => '$300,000 - above'
                                 ],
                                 ['class' => 'form-control', 'prompt' => 'Price']) ?>
                         </div>
                         <div class="col-lg-3 col-sm-4">
                             <?= Html::dropDownList(
-                                'bsr_type',
+                                'type',
                                 '',
                                 [
                                     'Apartment' => 'Apartment',
@@ -94,6 +95,7 @@ use \frontend\components\Common;
                     </div>
                     <?= Html::endForm() ?>
                 </div>
+
                 <?php
                 if (Yii::$app->user->isGuest): ?>
                     <div class="col-lg-5 col-lg-offset-1 col-sm-6 ">
@@ -101,8 +103,10 @@ use \frontend\components\Common;
                         <button class="btn btn-info"   data-toggle="modal" data-target="#loginpop">Login</button>
                     </div>
                 <?php endif; ?>
+
             </div>
         </div>
+
     </div>
 </div>
 <!-- banner -->
@@ -116,10 +120,10 @@ use \frontend\components\Common;
                     <div class="image-holder"><img src="<?=Common::getImageAdvert($row)[0] ?>"  class="img-responsive" alt="properties"/>
                         <div class="status <?=($row['sold']) ? 'sold' : 'new' ?>"><?=Common::getType($row) ?></div>
                     </div>
-                    <h4><a href="<?=Url::to(['/main/main/property-detail', 'id' => $row['id']]) ?>" ><?=Common::getTitleAdvert($row) ?></a></h4>
+                    <h4><a href="<?=Common::getUrlAdvert($row['id']) ?>" ><?=Common::getTitleAdvert($row) ?></a></h4>
                     <p class="price">Price: $<?=$row['price'] ?></p>
                     <div class="listing-detail"><span data-toggle="tooltip" data-placement="bottom" data-original-title="Bed Room"><?=$row['bedroom'] ?></span> <span data-toggle="tooltip" data-placement="bottom" data-original-title="Living Room"><?=$row['livingroom'] ?></span> <span data-toggle="tooltip" data-placement="bottom" data-original-title="Parking"><?=$row['parking'] ?></span> <span data-toggle="tooltip" data-placement="bottom" data-original-title="Kitchen"><?=$row['kitchen'] ?></span> </div>
-                    <a class="btn btn-primary" href="<?=Url::to(['/main/main/property-detail', 'id' => $row['id']]) ?>" >View Details</a>
+                    <a class="btn btn-primary" href="<?=Common::getUrlAdvert($row['id']) ?>" >View Details</a>
                 </div>
             <?php endforeach; ?>
         </div>
@@ -150,9 +154,9 @@ use \frontend\components\Common;
                                 <div class="row">
                                     <div class="col-lg-4"><img src="<?=Common::getImageAdvert($row)[0] ?>"  class="img-responsive" alt="properties"/></div>
                                     <div class="col-lg-8">
-                                        <h5><a href="<?=Url::to(['/main/main/property-detail', 'id' => $row['id']]) ?>" ><?=Common::getTitleAdvert($row) ?></a></h5>
+                                        <h5><a href="<?=Common::getUrlAdvert($row['id']) ?>" ><?=Common::getTitleAdvert($row) ?></a></h5>
                                         <p class="price">$<?=$row['price'] ?></p>
-                                        <a href="<?=Url::to(['/main/main/property-detail', 'id' => $row['id']]) ?>"  class="more">More Detail</a> </div>
+                                        <a href="<?=Common::getUrlAdvert($row['id']) ?>"  class="more">More Detail</a> </div>
                                 </div>
                             </div>
                             <?php $first = false; ?>

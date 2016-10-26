@@ -63,7 +63,7 @@ class Advert extends ActiveRecord
             //[['created_at', 'updated_at'], 'required'],
             [['address'], 'string', 'max' => 255],
             [['general_image'], 'string', 'max' => 500],
-            [['location'], 'string', 'max' => 30],
+            [['location'], 'string', 'max' => 50],
             [['type'], 'string', 'max' => 50],
         ];
     }

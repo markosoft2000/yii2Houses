@@ -3,6 +3,9 @@
 namespace app\modules\main\controllers;
 
 use common\models\Advert;
+use dosamigos\google\maps\LatLng;
+use dosamigos\google\maps\Map;
+use dosamigos\google\maps\overlays\Marker;
 use frontend\components\Common;
 use frontend\filters\FilterAdvert;
 use Yii;
@@ -10,6 +13,7 @@ use frontend\models\ContactForm;
 use frontend\models\SignupForm;
 use common\models\LoginForm;
 use yii\base\DynamicModel;
+use yii\data\Pagination;
 use yii\web\Response;
 use yii\widgets\ActiveForm;
 use \yii\web\Controller;
@@ -148,6 +152,25 @@ class MainController extends Controller
             $currentUser['username'] = Yii::$app->user->identity->username;
         }
 
+
+        $location = [0, 0];
+
+        if ($model->location) {
+            $location = str_replace(['(', ')'] , '', $model->location);
+            $location = explode(',', $location);
+        }
+
+        $coord = new LatLng(['lat' => $location[0], 'lng' => $location[1]]);
+        $map = new Map([
+            'center' => $coord,
+            'zoom' => 18,
+        ]);
+        $marker = new Marker([
+            'position' => $coord,
+            'title' => Common::getTitleAdvert($model),
+        ]);
+        $map->addOverlay($marker);
+
         return $this->render('propertyDetail',[
             'id' => $id,
             'model' => $model,
@@ -155,7 +178,59 @@ class MainController extends Controller
             'user' => $user,
             'images' => $images,
             'currentUser' => $currentUser,
+            'map' => $map,
         ]);
+    }
+
+    public function actionFind($property='', $operation = '', $price='', $type = '') {
+        $this->layout = 'sell';
+
+        $query = Advert::find();
+        $query->filterWhere(['like', 'address', $property])
+            ->orFilterWhere(['like', 'description', $property])
+            ->andFilterWhere(['type' => $type]);
+
+        if ($price) {
+            $prices = explode("-", $price);
+
+            if (isset($prices[0]) && isset($prices[1])) {
+                $query->andWhere(['between', 'price', $prices[0], $prices[1]]);
+            }
+            else{
+                $query->andWhere(['>=', 'price', $prices[0]]);
+            }
+        }
+
+        /*if (isset($sort)) {
+            $query->orderBy(['price' => 'ASC']);
+        }*/
+
+        $countQuery = clone $query;
+        $itemTotalCount = $countQuery->count();
+        unset($countQuery);
+        $pages = new Pagination(['totalCount' => $itemTotalCount]);
+        $pages->setPageSize(Yii::$app->params['searchItemPageLimit']);
+        $itemRange = ($pages->offset + 1) . '..' . (
+                ($pages->offset + $pages->limit) > $itemTotalCount ?
+                $itemTotalCount :
+                ($pages->offset + $pages->limit)
+            );
+
+        $adverts = $query->offset($pages->offset)->limit($pages->limit)->all();
+
+        return $this->render("find", [
+            'adverts' => $adverts,
+            'pages' => $pages,
+            'itemTotalCount' => $itemTotalCount,
+            'itemRange' => $itemRange,
+            'filter' => [
+                'property' => $property,
+                'operation' => $operation,
+                'price' => $price,
+                'type' => $type
+            ],
+        ]);
+
     }
 
 }

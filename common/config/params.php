@@ -7,4 +7,5 @@ return [
     'uploadImageResizeY' => 644,
     'uploadImageResizeQuality' => 100,
     'advertUploadDirectory' => 'uploads/adverts',
+    'searchItemPageLimit' => 10,
 ];

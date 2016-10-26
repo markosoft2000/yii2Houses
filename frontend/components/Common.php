@@ -63,4 +63,8 @@ class Common extends Component{
         return ($row['sold']) ? 'Sold' : 'New';
     }
 
+    public static function getUrlAdvert($id) {
+        return Url::to(['/main/main/property-detail', 'id' => $id]);
+    }
+
 }

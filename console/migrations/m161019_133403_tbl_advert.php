@@ -22,7 +22,7 @@ class m161019_133403_tbl_advert extends Migration
             'kitchen' => $this->smallInteger(1),
             'general_image' => $this->string(500),
             'description' => $this->text(),
-            'location' => $this->string(30),
+            'location' => $this->string(50),
             'hot' => $this->smallInteger(1),
             'sold' => $this->smallInteger(1),
             'type' => $this->string(50),
