@@ -25,7 +25,7 @@ use \yii\helpers\Url;
                 <?php
                     $menuItems = [
                         ['label' => 'Home', 'url' => Url::home()],
-                        ['label' => 'About', 'url' => '#'],
+                        ['label' => 'About', 'url' => ['/main/main/page', 'view' => 'about']],
                         ['label' => 'Contact', 'url' => Url::to('/main/main/contact')],
                     ];
 
@@ -56,6 +56,8 @@ use \yii\helpers\Url;
             $menuItems[] = ['label' => 'Login', 'url' => '#', 'linkOptions' => ['data-target' => '#loginpop', 'data-toggle' => "modal"]];
         } else{
             $menuItems[] = ['label' => 'Advert manager', 'url' => ['/cabinet/advert']];
+            $menuItems[] = ['label' => 'Settings', 'url' => ['/cabinet/default/settings']];
+            $menuItems[] = ['label' => 'Change password', 'url' => ['/cabinet/default/change-password']];
             $menuItems[] = ['label' => 'Logout',  'url' => ['/site/logout'], 'linkOptions' => ['data-method' => 'post']];
         }
 

@@ -33,6 +33,10 @@ class MainController extends Controller
             'test2' => [// custom action
                 'class' => 'frontend\actions\TestAction',
                 'viewName' => 'index'
+            ],
+            'page' => [// custom action
+                'class' => 'yii\web\ViewAction',
+                'layout' => 'inner'
             ]
         ];
     }
@@ -230,7 +234,9 @@ class MainController extends Controller
                 'type' => $type
             ],
         ]);
-
     }
 
+    public function actionAbout() {
+        return $this->render('about');
+    }
 }

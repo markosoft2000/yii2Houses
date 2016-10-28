@@ -7,5 +7,7 @@ return [
     'uploadImageResizeY' => 644,
     'uploadImageResizeQuality' => 100,
     'advertUploadDirectory' => 'uploads/adverts',
+    'userUploadDirectory' => 'uploads/users',
     'searchItemPageLimit' => 10,
+    'baseUrl' => 'http://yii2.loc',
 ];

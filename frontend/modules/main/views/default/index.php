@@ -20,7 +20,7 @@ use \frontend\components\Common;
             <div class="sl-slide" data-orientation="horizontal" data-slice1-rotation="-25" data-slice2-rotation="-25" data-slice1-scale="2" data-slice2-scale="2">
                 <div class="sl-slide-inner">
                     <div class="bg-img" style="background-image: url('<?=Common::getImageAdvert($row)[0] ?>')"></div>
-                    <h2><a href="#"><?=Common::getTitleAdvert($row) ?></a></h2>
+                    <h2><a href="<?=Url::to(['/main/main/property-detail', 'id' => $row['id']]) ?>"><?=Common::getTitleAdvert($row) ?></a></h2>
                     <blockquote>
                         <p class="location"><span class="glyphicon glyphicon-map-marker"></span> <?=$row['address'] ?></p>
                         <p><?=Common::substr($row['description']) ?></p>
@@ -111,7 +111,7 @@ use \frontend\components\Common;
 </div>
 <!-- banner -->
 <div class="container">
-    <div class="properties-listing spacer"> <a href="buysalerent.html"  class="pull-right viewall">View All Listing</a>
+    <div class="properties-listing spacer"> <a href="<?=Url::to() ?>"  class="pull-right viewall">View All Listing</a>
         <h2>Featured Properties</h2>
         <div id="owl-example" class="owl-carousel">
             <?php
