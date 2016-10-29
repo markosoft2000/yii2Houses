@@ -205,9 +205,10 @@ class MainController extends Controller
             }
         }
 
-        /*if (isset($sort)) {
-            $query->orderBy(['price' => 'ASC']);
-        }*/
+        $sort = Yii::$app->request->get('sort', '');
+        if ($sort) {
+            $query->orderBy(['price' => ($sort == 'ASC' ? SORT_ASC : SORT_DESC)]);
+        }
 
         $countQuery = clone $query;
         $itemTotalCount = $countQuery->count();

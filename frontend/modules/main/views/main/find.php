@@ -16,47 +16,48 @@ use \frontend\components\Common;
         <div class="col-lg-3 col-sm-4 ">
 
             <div class="search-form"><h4><span class="glyphicon glyphicon-search"></span> Search for</h4>
-                <?=Html::beginForm(Url::to('/main/main/find/'), 'get') ?>
-                <?= Html::textInput('property', $filter['property'], ['class' => 'form-control', 'placeholder' => "Search of Properties"]) ?>
-                <div class="row">
-                    <div class="col-lg-5">
-                        <?= Html::dropDownList(
-                            'operation',
-                            $filter['operation'],
-                            [
-                                'Buy' => 'Buy',
-                                'Rent' => 'Rent',
-                                'Sale' => 'Sale'
-                            ],
-                            ['class' => 'form-control']) ?>
+                <?=Html::beginForm(Url::to('/main/main/find/'), 'get', ['id' => 'find_form']) ?>
+                    <?= Html::textInput('property', $filter['property'], ['class' => 'form-control', 'placeholder' => "Search of Properties"]) ?>
+                    <div class="row">
+                        <div class="col-lg-5">
+                            <?= Html::dropDownList(
+                                'operation',
+                                $filter['operation'],
+                                [
+                                    'Buy' => 'Buy',
+                                    'Rent' => 'Rent',
+                                    'Sale' => 'Sale'
+                                ],
+                                ['class' => 'form-control']) ?>
+                        </div>
+                        <div class="col-lg-7">
+                            <?= Html::dropDownList(
+                                'price',
+                                $filter['price'],
+                                [
+                                    '150000-200000' => '$150,000 - $200,000',
+                                    '200000-250000' => '$200,000 - $250,000',
+                                    '250000-300000' => '$250,000 - $300,000',
+                                    '300000' => '$300,000 - above'
+                                ],
+                                ['class' => 'form-control', 'prompt' => 'Price']) ?>
+                        </div>
                     </div>
-                    <div class="col-lg-7">
-                        <?= Html::dropDownList(
-                            'price',
-                            $filter['price'],
-                            [
-                                '150000-200000' => '$150,000 - $200,000',
-                                '200000-250000' => '$200,000 - $250,000',
-                                '250000-300000' => '$250,000 - $300,000',
-                                '300000' => '$300,000 - above'
-                            ],
-                            ['class' => 'form-control', 'prompt' => 'Price']) ?>
-                    </div>
-                </div>
 
-                <div class="row">
-                    <div class="col-lg-12">
-                        <?= Html::dropDownList(
-                            'type',
-                            $filter['type'],
-                            [
-                                'Apartment' => 'Apartment',
-                                'Building' => 'Building',
-                                'Office Space' => 'Office Space'
-                            ],
-                            ['class' => 'form-control', 'prompt' => 'Property']) ?>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <?= Html::dropDownList(
+                                'type',
+                                $filter['type'],
+                                [
+                                    'Apartment' => 'Apartment',
+                                    'Building' => 'Building',
+                                    'Office Space' => 'Office Space'
+                                ],
+                                ['class' => 'form-control', 'prompt' => 'Property']) ?>
+                        </div>
                     </div>
-                </div>
+                    <?=Html::hiddenInput('sort', '', ['id' => 'find_sort']) ?>
                     <?= Html::submitButton('Find Now', ['class' => 'btn btn-primary'])?>
                 <?= Html::endForm() ?>
             </div>
@@ -73,12 +74,16 @@ use \frontend\components\Common;
                 <div class="pull-right">
                     <?= Html::dropDownList(
                         'sort',
-                        '',
+                        Yii::$app->request->get('sort'),
                         [
                             'ASC' => 'Price: Low to High',
                             'DESC' => 'Price: High to Low'
                         ],
-                        ['class' => 'form-control', 'prompt' => 'Sort by']) ?>
+                        [
+                            'class' => 'form-control',
+                            'prompt' => 'Sort by',
+                            'onchange' => "$('#find_sort').val(this.value); $('#find_form').submit();",
+                        ]) ?>
             </div>
 
             </div>
