@@ -31,6 +31,10 @@ class ComposerStaticInit04a9841027a92026911c0693194e6177
             'yii\\bootstrap\\' => 14,
             'yii\\' => 4,
         ),
+        'r' => 
+        array (
+            'rmrevin\\yii\\fontawesome\\' => 24,
+        ),
         'k' => 
         array (
             'kartik\\plugins\\fileinput\\' => 25,
@@ -40,6 +44,7 @@ class ComposerStaticInit04a9841027a92026911c0693194e6177
         'd' => 
         array (
             'dosamigos\\google\\maps\\' => 22,
+            'dmstr\\' => 6,
         ),
         'c' => 
         array (
@@ -102,6 +107,10 @@ class ComposerStaticInit04a9841027a92026911c0693194e6177
         array (
             0 => __DIR__ . '/..' . '/yiisoft/yii2',
         ),
+        'rmrevin\\yii\\fontawesome\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/rmrevin/yii2-fontawesome',
+        ),
         'kartik\\plugins\\fileinput\\' => 
         array (
             0 => __DIR__ . '/..' . '/kartik-v/bootstrap-fileinput',
@@ -117,6 +126,10 @@ class ComposerStaticInit04a9841027a92026911c0693194e6177
         'dosamigos\\google\\maps\\' => 
         array (
             0 => __DIR__ . '/..' . '/2amigos/yii2-google-maps-library',
+        ),
+        'dmstr\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/dmstr/yii2-adminlte-asset',
         ),
         'cebe\\markdown\\' => 
         array (
@@ -145,6 +158,13 @@ class ComposerStaticInit04a9841027a92026911c0693194e6177
     );
 
     public static $prefixesPsr0 = array (
+        'c' => 
+        array (
+            'cebe\\gravatar\\' => 
+            array (
+                0 => __DIR__ . '/..' . '/cebe/yii2-gravatar',
+            ),
+        ),
         'I' => 
         array (
             'Imagine' => 

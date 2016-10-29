@@ -2,6 +2,7 @@
 
 namespace common\models;
 
+use frontend\components\Common;
 use Yii;
 use \yii\db\ActiveRecord;
 use yii\behaviors\TimestampBehavior;
@@ -115,5 +116,9 @@ class Advert extends ActiveRecord
     public static function find()
     {
         return new AdvertQuery(get_called_class());
+    }
+
+    public function getTitle() {
+        return Common::getTitleAdvert($this);
     }
 }
