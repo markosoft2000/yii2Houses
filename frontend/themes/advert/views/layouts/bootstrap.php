@@ -3,8 +3,8 @@
 /* @var $content string */
 
 use \yii\helpers\Html;
-use \yii\helpers\Url;
 use \frontend\assets\MainAsset;
+use \common\widgets\Alert;
 
 MainAsset::register($this);
 ?>
@@ -23,34 +23,27 @@ MainAsset::register($this);
 <body>
 <?php $this->beginBody(); ?>
 
+<?php
+/*if (Yii::$app->session->hasFlash('reg_success')) { // target check for flash message
+    echo Yii::$app->session->getFlash('reg_success');
 
-<?= $this->render("//common/header") ?>
+    //or
+    echo yii\bootstrap\Alert::widget([
+        'options' => ['class' => 'alert-info'],
+        'body' => Yii::$app->session->getFlash('reg_success')
+    ]);
+}*/
+?>
 
+<?= Alert::widget() ?>
 
-<div class="inside-banner">
-    <div class="container">
-        <span class="pull-right">
-            <?=\yii\widgets\Breadcrumbs::widget([
-                'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-            ]); ?>
-        </span>
-        <h2><?= $this->title ?></h2>
-    </div>
-</div>
+<?= $this->render("//common/header"); ?>
 
+<?= $content ?>
 
-<div class="container">
-    <div class="spacer">
-        <?= $content ?>
-    </div>
-</div>
-
-
-<?= $this->render("//common/footer") ?>
-
+<?= $this->render("//common/footer"); ?>
 
 <?php $this->endBody(); ?>
 </body>
-
 </html>
 <?php $this->endPage(); ?>

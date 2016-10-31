@@ -7,6 +7,7 @@ $params = array_merge(
 );
 
 Yii::setAlias('@test', 123);
+\Yii::setAlias('theme_view', '@frontend/themes/advert/views');
 
 return [
     'id' => 'app-frontend',
@@ -39,6 +40,15 @@ return [
                 'charset'    => 'UTF-8',
             ],
         ],
+        /*
+        'view' => [
+            'theme' => [
+                'class' => 'frontend\themes\advert\Theme',
+                'basePath' => '@app/',
+                'baseUrl'  => '@web/',
+            ],
+        ],
+         */
         'common' => [
             'class' => 'frontend\components\Common',
         ],
