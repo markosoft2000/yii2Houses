@@ -18,6 +18,7 @@ return [
                 'pages/<view:[a-zA-Z0-9-]+>' => 'main/main/page',
                 'property-detail/<id:\d+>' => 'main/main/property-detail',
                 'cabinet/<action_cabinet:(settings|change-password)>' => 'cabinet/default/<action_cabinet>',
+                'cabinet/advert/<action:(view|update|delete)>/<id:\d+>' => 'cabinet/advert/<action>',
                 'logout' => 'site/logout'
             ],
         ],
