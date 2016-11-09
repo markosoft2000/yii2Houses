@@ -96,7 +96,8 @@ class Advert extends ActiveRecord
     }
 
     public function afterValidate() {
-        $this->fk_agent_detail = Yii::$app->user->id;
+        //creating filtering ads for current user
+        //$this->fk_agent_detail = Yii::$app->user->id;
         parent::afterValidate();
     }
 

@@ -27,7 +27,12 @@ $this->params['breadcrumbs'][] = $this->title;
             'id',
             'price',
             'address',
-            'user.username',
+            [
+                'label' => 'Agent',
+                'attribute' => 'fk_agent_detail',
+                'filter' => \common\models\User::find()->select(['username', 'id'])->indexBy('id')->column(),
+                'value' => 'user.username'
+            ],
             'bedroom',
             'livingroom',
             'parking',

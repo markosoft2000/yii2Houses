@@ -41,12 +41,27 @@ class AdvertSearch extends Advert
      */
     public function search($params)
     {
-        $query = Advert::find();
+        $query = Advert::find()->joinWith(['user']);
 
         // add conditions that should always apply here
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
+            'sort' => [
+                'defaultOrder' => ['id' => SORT_DESC],
+                'attributes' => [
+                    'id',
+                    'price',
+                    'fk_agent_detail' => [
+                        'asc' => [User::tableName() . '.username' => SORT_ASC],
+                        'desc' => [User::tableName() . '.username' => SORT_DESC]
+                    ],
+                    'bedroom',
+                    'livingroom',
+                    'parking',
+                    'kitchen'
+                ]
+            ]
         ]);
 
         $this->load($params);

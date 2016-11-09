@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
+use \yii\helpers\ArrayHelper;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\Advert */
@@ -15,7 +16,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <!--    <h1>--><?//= Html::encode($this->title) ?><!--</h1>-->
 
     <p>
-        <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary', 'style' => 'width: auto;']) ?>
         <?= Html::a('Delete', ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger',
             'data' => [
@@ -31,7 +32,11 @@ $this->params['breadcrumbs'][] = $this->title;
             'id',
             'price',
             'address',
-            'fk_agent_detail',
+            [//'fk_agent_detail',
+                'label' => 'Agent',
+                'attribute' => 'fk_agent_detail',
+                'value' => ArrayHelper::getValue($model, 'user.username'),
+            ],
             'bedroom',
             'livingroom',
             'parking',
@@ -39,12 +44,12 @@ $this->params['breadcrumbs'][] = $this->title;
             'general_image',
             'description:ntext',
             'location',
-            'hot',
-            'sold',
+            'hot:boolean',
+            'sold:boolean',
             'type',
-            'recommend',
-            'created_at',
-            'updated_at',
+            'recommend:boolean',
+            'created_at:date',
+            'updated_at:datetime',
         ],
     ]) ?>
 
